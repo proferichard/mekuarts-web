@@ -1,33 +1,37 @@
 # SETUP — Despliegue de mekuarts.com
 
-Pasos restantes para publicar el sitio. Todo lo demás ya está listo.
+Pasos restantes para publicar el sitio. Tu usuario de GitHub: **`proferichard`**.
 
 ---
 
 ## 1) Crear repo en GitHub (1 minuto)
 
-1. Entra a https://github.com/new (logueado en tu cuenta).
+1. Entra a https://github.com/new (logueado en `proferichard`).
 2. Llena:
-   - **Repository name:** `mekuarts-web` (o `mekuarts.com`, como prefieras)
+   - **Repository name:** `mekuarts-web`
    - **Public** ✅
    - NO marques "Add README", "Add .gitignore" ni "Choose a license"
 3. Click **Create repository**.
 
 GitHub te llevará a una pantalla con instrucciones. Ignóralas — usa los comandos de abajo.
 
+> Si prefieres otro nombre de repo (ej. `mekuarts.com`, `meku-website`), úsalo — pero acuérdate de cambiarlo también en el comando del paso 2.
+
 ---
 
 ## 2) Subir el código (30 segundos)
 
-Abre la terminal y corre (reemplaza `TU_USUARIO` por tu username de GitHub y `NOMBRE_REPO` por el nombre que pusiste):
+Abre la terminal y pega tal cual:
 
 ```bash
 cd ~/Documents/mekuarts
-git remote add origin https://github.com/TU_USUARIO/NOMBRE_REPO.git
+git remote add origin https://github.com/proferichard/mekuarts-web.git
 git push -u origin main
 ```
 
-Te va a pedir login. Si no tienes configurado, GitHub te abrirá el navegador para autorizar.
+Te va a pedir login. Si no tienes configurado, GitHub te abrirá el navegador para autorizar (o usará tu Keychain de macOS).
+
+> Si elegiste otro nombre de repo, reemplaza `mekuarts-web` por el que pusiste.
 
 ---
 
@@ -36,10 +40,11 @@ Te va a pedir login. Si no tienes configurado, GitHub te abrirá el navegador pa
 1. En el repo de GitHub: **Settings** (arriba a la derecha) → **Pages** (menú izquierdo).
 2. **Build and deployment**:
    - **Source:** Deploy from a branch
-   - **Branch:** `main` / `(root)`
-   - Click **Save**.
+   - **Branch:** `main` / `(root)` → **Save**.
 3. **Custom domain:** debería aparecer ya `mekuarts.com` (porque tenemos el archivo CNAME). Si no, escríbelo y dale Save.
 4. Espera ~1-2 minutos. GitHub verifica el DNS — al principio dará error, es normal hasta que configures DonWeb.
+
+URL temporal mientras configuras el DNS: **https://proferichard.github.io/mekuarts-web/**
 
 ---
 
@@ -47,7 +52,7 @@ Te va a pedir login. Si no tienes configurado, GitHub te abrirá el navegador pa
 
 Entra a tu panel de DonWeb → **Dominios** → **mekuarts.com** → **Zonas DNS** (o "Editor de zonas DNS" / "Administrador DNS").
 
-### Records a agregar / editar:
+### Records a agregar:
 
 **A) Cuatro registros tipo A para el dominio raíz (`@` = mekuarts.com):**
 
@@ -64,9 +69,9 @@ Entra a tu panel de DonWeb → **Dominios** → **mekuarts.com** → **Zonas DNS
 
 | Tipo  | Nombre / Host | Valor / Apunta a            | TTL  |
 |-------|---------------|------------------------------|------|
-| CNAME | www           | TU_USUARIO.github.io         | 3600 |
+| CNAME | www           | proferichard.github.io.      | 3600 |
 
-> Reemplaza `TU_USUARIO` por tu usuario real de GitHub (en minúsculas). Importante: SÍ pon el `.` final si DonWeb te lo pide, o asegúrate de que quede como FQDN.
+> Importante: incluye el `.` final si DonWeb te lo pide (es FQDN). Si no acepta, déjalo sin punto.
 
 **C) Eliminar records existentes:**
 
@@ -83,7 +88,7 @@ dig mekuarts.com +short
 # Debe mostrar las 4 IPs de GitHub: 185.199.108.153, etc.
 
 dig www.mekuarts.com +short
-# Debe mostrar: TU_USUARIO.github.io.
+# Debe mostrar: proferichard.github.io.
 ```
 
 O usa https://dnschecker.org para ver la propagación globalmente.
@@ -99,7 +104,7 @@ Cuando el DNS ya esté propagado:
 3. Marca **Enforce HTTPS** ✅.
 4. GitHub provisiona el certificado de Let's Encrypt automáticamente (puede tardar unos minutos).
 
-¡Listo! mekuarts.com queda servido por GitHub Pages con HTTPS. 🎉
+¡Listo! **https://mekuarts.com** queda en línea con HTTPS. 🎉
 
 ---
 
