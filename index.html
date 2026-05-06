@@ -1022,20 +1022,16 @@
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 
-  <!-- Meta Pixel — Contact event on WhatsApp click -->
+  <!-- Meta Pixel — Contact event on WhatsApp click (v2: event delegation) -->
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var waLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href*="wa.link"]');
-    waLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
-        if (typeof fbq === 'function') {
-          fbq('track', 'Contact', {
-            content_name: 'whatsapp_click',
-            content_category: link.dataset.category || 'general'
-          });
-        }
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href*="wa.link"]');
+    if (link && typeof fbq === 'function') {
+      fbq('track', 'Contact', {
+        content_name: 'whatsapp_click',
+        content_category: link.dataset.category || 'general'
       });
-    });
+    }
   });
   </script>
   <!-- End Contact event -->
