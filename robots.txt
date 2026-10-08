@@ -1,0 +1,37 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-Agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+
+User-Agent: Claude-User
+Allow: /
+Disallow: /api/
+
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-Agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-Agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+Sitemap: https://mekuarts.com/sitemap.xml
